@@ -7,7 +7,7 @@ class commentModel {
     }
 
     function insertComments($userId, $content, $articleId) {
-        $sql = "insert into comment(userId, content, articleId) values($userId, $content, $articleId)";
-        return $sql
+        $sql = "insert into comment(userId, content, articleId) values('$userId', '$content', '$articleId')";
+        return $sql;
     }
 }

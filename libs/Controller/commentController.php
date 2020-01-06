@@ -32,7 +32,7 @@ class commentController {
     /**
      * 发布评论
      */
-    releaseComments() {
+    public function releaseComments() {
         $this->connect();
         $postParams = json_decode($this->postParams);
         if(!isset($postParams->userId) || !isset($postParams->content) || !isset($postParams->articleId)) {
@@ -48,4 +48,12 @@ class commentController {
             print json_encode($response);
         }
     }
+
+    /**
+     * 点赞
+     */
+    public function goodLikeArticle() {
+
+    }
+    
 }
