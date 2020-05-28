@@ -1,12 +1,13 @@
 <?php
 class commentController {
 
-    private $conn,$postParams;
+    public $conn, $postParams;
 
     public function connect() {
         require_once('./config/config.php');
         $this->conn = M('mysql')->connect($config);
         $this->postParams = isset($GLOBALS['HTTP_RAW_POST_DATA'])?$GLOBALS['HTTP_RAW_POST_DATA']:file_get_contents("php://input");
+        return $this->postParams;
     }
 
     /**

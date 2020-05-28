@@ -85,7 +85,7 @@ class getIndexController {
     /**
      * 修改用户资料
      */
-    public function update_profile() {
+    public function updateProfile() {
         $this->connect();
         $postParams = json_decode($this->postParams);
         if(!isset($postParams->id) || !isset($postParams->name) || !isset($postParams->autograph)) {
@@ -111,7 +111,7 @@ class getIndexController {
     /**
      * 文章查询
      */
-    public function article_detail() {
+    public function articleDetail() {
         $this->connect();
         $postParams = json_decode($this->postParams);
         if(!isset($postParams->id)) {
