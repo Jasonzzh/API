@@ -7,7 +7,6 @@ class commentController {
         require_once('./config/config.php');
         $this->conn = M('mysql')->connect($config);
         $this->postParams = isset($GLOBALS['HTTP_RAW_POST_DATA'])?$GLOBALS['HTTP_RAW_POST_DATA']:file_get_contents("php://input");
-        return $this->postParams;
     }
 
     /**
@@ -16,7 +15,7 @@ class commentController {
     public function getComments() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->id) || !isset($postParams->pageNo) || !isset($postParams->pageSize)) {
+        if(empty($postParams->id) || !isset($postParams->pageNo) || empty($postParams->pageSize)) {
             $response = array('code' => 400,'msg' => '参数错误!');
             print json_encode($response);
         } else {
@@ -36,7 +35,7 @@ class commentController {
     public function releaseComments() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->userId) || !isset($postParams->content) || !isset($postParams->articleId)) {
+        if(empty($postParams->userId) || empty($postParams->content) || empty($postParams->articleId)) {
             $response = array('code' => 400,'msg' => '参数错误!');
             print json_encode($response);
         } else {

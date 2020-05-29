@@ -16,7 +16,7 @@ class getIndexController {
     public function followBlogList() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->nums) || !isset($postParams->page) || !isset($postParams->category_id)) {
+        if(empty($postParams->nums) || !isset($postParams->page) || empty($postParams->category_id)) {
             $response = array('code' => 400,'msg' => '参数错误！');
             print json_encode($response);
         } else {
@@ -36,7 +36,7 @@ class getIndexController {
     public function search() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->keywords) || !isset($postParams->page) || !isset($postParams->nums)) {
+        if(empty($postParams->keywords) || empty($postParams->page) || empty($postParams->nums)) {
             $response = array('code' => 400,'msg' => '参数错误！');
             print json_encode($response);
         } else {
@@ -57,7 +57,7 @@ class getIndexController {
     public function login() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->iphone) || !isset($postParams->password)) {
+        if(empty($postParams->iphone) || empty($postParams->password)) {
             $response = array('code' => 400,'msg' => '参数错误！');
             print json_encode($response);
         }
@@ -88,7 +88,7 @@ class getIndexController {
     public function updateProfile() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->id) || !isset($postParams->name) || !isset($postParams->autograph)) {
+        if(empty($postParams->id) || empty($postParams->name) || empty($postParams->autograph)) {
             $response = array('code' => 400,'msg' => '参数错误！');
             print json_encode($response);
         } else {
@@ -114,7 +114,7 @@ class getIndexController {
     public function articleDetail() {
         $this->connect();
         $postParams = json_decode($this->postParams);
-        if(!isset($postParams->id)) {
+        if(empty($postParams->id)) {
             $response = array('code' => 400,'msg' => '参数错误！');
             print json_encode($response);
         } else {
@@ -125,4 +125,27 @@ class getIndexController {
             print json_encode($response);
         }
     }
+
+    /**
+     * 获取文章分类
+     */
+    public function getArticleCategory() {
+        $this->connect();
+        $sql = M('news')->findAll('article_category');
+        $result = M('mysql')->query($this->conn, $sql);
+        $response = array('code' => 200,'msg' => '请求成功！','data' => $result);
+        print json_encode($response);
+    }
+
+    /**
+     * 获取关于我数据方法
+     */
+    public function getAboutMe() {
+        $this->connect();
+        $sql = M('aboutMe')->findAllData();
+        $result = M('mysql')->query($this->conn, $sql);
+        $response = array('code' => 200,'msg' => '请求成功！','data' => $result[0]);
+        print json_encode($response);
+    }
+    
 }
